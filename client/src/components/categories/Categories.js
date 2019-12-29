@@ -11,12 +11,12 @@ const Categories = () => {
   });
 
   return (
-    <Fragment>
+    <div className='list-group'>
       <h1>种类</h1>
       {categories.categories.map(category => (
         <CategoryItem key={category.id} category={category} />
       ))}
-    </Fragment>
+    </div>
   );
 };
 

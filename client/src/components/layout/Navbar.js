@@ -1,5 +1,6 @@
 import React, { Fragment } from 'react';
 import Search from './Search';
+import { Link } from 'react-router-dom';
 
 const Navbar = () => {
   return (
@@ -22,16 +23,20 @@ const Navbar = () => {
 
         <div className='collapse navbar-collapse' id='navbarSupportedContent'>
           <ul className='navbar-nav mr-auto'>
-            <li className='nav-item active'>
-              <a className='nav-link'>
-                主页 <span className='sr-only'>(current)</span>
-              </a>
+            <li className='nav-item'>
+              <Link className='nav-link' to='/'>
+                主页
+              </Link>
             </li>
             <li className='nav-item'>
-              <a className='nav-link'>种类</a>
+              <Link className='nav-link' to='/category'>
+                种类
+              </Link>
             </li>
             <li>
-              <a className='nav-link'>链接</a>
+              <Link className='nav-link' to='/link'>
+                连接
+              </Link>
             </li>
           </ul>
           <Search />
