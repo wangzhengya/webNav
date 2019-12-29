@@ -1,10 +1,11 @@
 import React, { Fragment } from 'react';
+import Search from './Search';
 
 const Navbar = () => {
   return (
     <Fragment>
       <nav className='navbar navbar-expand-lg navbar-light bg-light'>
-        <a className='navbar-brand' href='#'>
+        <a className='navbar-brand' href='./'>
           Web Nav
         </a>
         <button
@@ -22,55 +23,23 @@ const Navbar = () => {
         <div className='collapse navbar-collapse' id='navbarSupportedContent'>
           <ul className='navbar-nav mr-auto'>
             <li className='nav-item active'>
-              <a className='nav-link' href='#'>
-                Home <span className='sr-only'>(current)</span>
+              <a className='nav-link'>
+                主页 <span className='sr-only'>(current)</span>
               </a>
             </li>
             <li className='nav-item'>
-              <a className='nav-link' href='#'>
-                Link
-              </a>
+              <a className='nav-link'>种类</a>
             </li>
-            <li className='nav-item dropdown'>
-              <a
-                className='nav-link dropdown-toggle'
-                href='#'
-                id='navbarDropdown'
-                role='button'
-                data-toggle='dropdown'
-                aria-haspopup='true'
-                aria-expanded='false'
-              >
-                Dropdown
-              </a>
-              <div className='dropdown-menu' aria-labelledby='navbarDropdown'>
-                <a className='dropdown-item' href='#'>
-                  Action
-                </a>
-                <a className='dropdown-item' href='#'>
-                  Another action
-                </a>
-                <div className='dropdown-divider'></div>
-                <a className='dropdown-item' href='#'>
-                  Something else here
-                </a>
-              </div>
+            <li>
+              <a className='nav-link'>链接</a>
             </li>
           </ul>
-          <form class='form-inline my-2 my-lg-0'>
-            <input
-              class='form-control mr-sm-2'
-              type='search'
-              placeholder='Search'
-              aria-label='Search'
-            />
-            <button
-              className='btn btn-outline-success my-2 my-sm-0'
-              type='submit'
-            >
-              Search
-            </button>
-          </form>
+          <Search />
+          <ul className='navbar-nav'>
+            <li className='nav-item'>
+              <a className='nav-link'>登录</a>
+            </li>
+          </ul>
         </div>
       </nav>
     </Fragment>
