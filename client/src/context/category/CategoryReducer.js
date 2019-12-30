@@ -5,7 +5,8 @@ import {
   SET_CURRENT,
   CLEAR_CURRENT,
   UPDATE_CATEGORY,
-  CATEGORY_ERROR
+  CATEGORY_ERROR,
+  CLEAR_CATEGORIES
 } from '../types';
 
 export default (state, action) => {
@@ -21,6 +22,39 @@ export default (state, action) => {
         ...state,
         loading: false,
         categories: [...state.categories, action.payload]
+      };
+    case CLEAR_CATEGORIES:
+      return {
+        ...state,
+        categories: null,
+        error: null,
+        current: null
+      };
+    case DELETE_CATEGORY:
+      return {
+        ...state,
+        loading: false,
+        categories: state.categories.filter(
+          category => category._id !== action.payload
+        )
+      };
+    case SET_CURRENT:
+      return {
+        ...state,
+        current: action.payload
+      };
+    case UPDATE_CATEGORY:
+      return {
+        ...state,
+        loading: false,
+        categories: state.categories.map(category =>
+          category._id === action.payload._id ? action.payload : category
+        )
+      };
+    case CLEAR_CURRENT:
+      return {
+        ...state,
+        current: null
       };
     case CATEGORY_ERROR:
       return {

@@ -9,7 +9,8 @@ import {
   SET_CURRENT,
   CLEAR_CURRENT,
   UPDATE_CATEGORY,
-  CATEGORY_ERROR
+  CATEGORY_ERROR,
+  CLEAR_CATEGORIES
 } from '../types';
 
 const CategoryState = props => {
@@ -28,16 +29,15 @@ const CategoryState = props => {
     };
     try {
       const res = await axios.get('/api/categories', config);
-      console.log(res.data);
       dispatch({ type: GET_CATEGORIES, payload: res.data });
     } catch (err) {
       dispatch({ type: CATEGORY_ERROR, payload: err.response.msg });
     }
   };
   // //clear categories
-  // const clearCategorys = () => {
-  //   dispatch({ type: CLEAR_CATEGORIES });
-  // };
+  const clearCategories = () => {
+    dispatch({ type: CLEAR_CATEGORIES });
+  };
   //Add Category
   const addCategory = async category => {
     const config = {
@@ -52,57 +52,71 @@ const CategoryState = props => {
       dispatch({ type: CATEGORY_ERROR, payload: err.response.msg });
     }
   };
-  // //Delete Category
-  // const deleteCategory = async id => {
-  //   try {
-  //     await axios.delete(`/api/categories/${id}`);
-  //     dispatch({
-  //       type: DELETE_CATEGORY,
-  //       payload: id
-  //     });
-  //   } catch (err) {
-  //     dispatch({
-  //       type: CATEGORY_ERROR,
-  //       payload: err.response.msg
-  //     });
-  //   }
-  //   dispatch({ type: DELETE_CATEGORY, payload: id });
-  // };
-  // //set current category
-  // const setCurrent = category => {
-  //   dispatch({ type: SET_CURRENT, payload: category });
-  // };
-  // //clear current category
-  // const clearCurrent = () => {
-  //   dispatch({ type: CLEAR_CURRENT });
-  // };
-  // //update category
-  // const updateCategory = category => {
-  //   dispatch({ type: UPDATE_CATEGORY, payload: category });
-  // };
-  // //filter categories
-  // const filterCategorys = text => {
-  //   dispatch({ type: FILTER_CATEGORIES, payload: text });
-  // };
-  // //clear filter
-  // const clearFilter = () => {
-  //   dispatch({ type: CLEAR_FILTER });
-  // };
+  //Delete Category
+  const deleteCategory = async id => {
+    try {
+      await axios.delete(`/api/categories/${id}`);
+      dispatch({
+        type: DELETE_CATEGORY,
+        payload: id
+      });
+    } catch (err) {
+      dispatch({
+        type: CATEGORY_ERROR,
+        payload: err.response.msg
+      });
+    }
+    dispatch({ type: DELETE_CATEGORY, payload: id });
+  };
+  //set current category
+  const setCurrent = category => {
+    dispatch({ type: SET_CURRENT, payload: category });
+  };
+  //clear current category
+  const clearCurrent = () => {
+    dispatch({ type: CLEAR_CURRENT });
+  };
+  //update category
+  const updateCategory = async category => {
+    const config = {
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    };
+
+    try {
+      const res = await axios.put(
+        `/api/categories/${category._id}`,
+        category,
+        config
+      );
+      console.log(res.data);
+      dispatch({
+        type: UPDATE_CATEGORY,
+        payload: res.data
+      });
+    } catch (err) {
+      console.log(err);
+      dispatch({
+        type: CATEGORY_ERROR,
+        payload: err.response.msg
+      });
+    }
+  };
   return (
     <CategoryContext.Provider
       value={{
         categories: state.categories,
         current: state.current,
         error: state.error,
-        // addCategory,
-        // deleteCategory,
-        // setCurrent,
-        // clearCurrent,
-        // updateCategory,
-        // filterCategorys,
-        // clearFilter,
-        getCategories
-        // clearCategorys
+        addCategory,
+        deleteCategory,
+        setCurrent,
+        clearCurrent,
+        updateCategory,
+
+        getCategories,
+        clearCategories
       }}
     >
       {props.children}

@@ -11,6 +11,8 @@ import Category from './components/pages/Category';
 import Login from './components/auth/Login';
 import Register from './components/auth/Register';
 
+import PrivateRoute from './components/routing/PrivateRoute';
+
 function App() {
   return (
     <AuthState>
@@ -22,11 +24,11 @@ function App() {
               <div className='container'>
                 <Alerts />
                 <Switch>
-                  <Route exact path='/' component={Home} />
+                  <PrivateRoute exact path='/' component={Home} />
                   <Route exact path='/register' component={Register} />
                   <Route exact path='/login' component={Login} />
                   <Route exact path='/about' component={About} />
-                  <Route exact path='/category' component={Category} />
+                  <PrivateRoute exact path='/category' component={Category} />
                 </Switch>
               </div>
             </Fragment>

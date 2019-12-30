@@ -3,7 +3,6 @@ import axios from 'axios';
 import AuthContext from './AuthContext';
 import authReducer from './AuthReducer';
 import setAuthToken from '../../utils/setAuthToken';
-
 import {
   REGISTER_SUCCESS,
   REGISTER_FAIL,
@@ -23,16 +22,16 @@ const AuthState = props => {
     user: null,
     error: null
   };
+
   const [state, dispatch] = useReducer(authReducer, initialState);
 
-  //Load User
+  // Load User
   const loadUser = async () => {
-    if (localStorage.token) {
-      setAuthToken(localStorage.token);
-    }
-    //@todo -load token into global headers
+    setAuthToken(localStorage.token);
+
     try {
       const res = await axios.get('/api/auth');
+
       dispatch({
         type: USER_LOADED,
         payload: res.data
@@ -42,7 +41,7 @@ const AuthState = props => {
     }
   };
 
-  //Register User
+  // Register User
   const register = async formData => {
     const config = {
       headers: {
@@ -52,10 +51,12 @@ const AuthState = props => {
 
     try {
       const res = await axios.post('/api/users', formData, config);
+
       dispatch({
         type: REGISTER_SUCCESS,
         payload: res.data
       });
+
       loadUser();
     } catch (err) {
       dispatch({
@@ -65,7 +66,7 @@ const AuthState = props => {
     }
   };
 
-  //Login User
+  // Login User
   const login = async formData => {
     const config = {
       headers: {
@@ -75,10 +76,12 @@ const AuthState = props => {
 
     try {
       const res = await axios.post('/api/auth', formData, config);
+
       dispatch({
         type: LOGIN_SUCCESS,
         payload: res.data
       });
+
       loadUser();
     } catch (err) {
       dispatch({
@@ -88,17 +91,11 @@ const AuthState = props => {
     }
   };
 
-  //Logout
-  const logout = () =>
-    dispatch({
-      type: LOGOUT
-    });
+  // Logout
+  const logout = () => dispatch({ type: LOGOUT });
 
-  //Clear Errors
-  const clearErrors = () =>
-    dispatch({
-      type: CLEAR_ERRORS
-    });
+  // Clear Errors
+  const clearErrors = () => dispatch({ type: CLEAR_ERRORS });
 
   return (
     <AuthContext.Provider

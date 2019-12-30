@@ -1,13 +1,70 @@
-import React, { Fragment } from 'react';
-import Search from './Search';
+import React, { Fragment, useContext, useEffect } from 'react';
+import Search from '../../components/layout/Search';
 import { Link } from 'react-router-dom';
+import AuthContext from '../../context/auth/AuthContext';
+import CatetoryContext from '../../context/category/CategoryContext';
 
 const Navbar = () => {
+  const authContext = useContext(AuthContext);
+  const catetoryContext = useContext(CatetoryContext);
+
+  const { isAuthenticated, logout, user, loadUser } = authContext;
+  const { clearCategories } = catetoryContext;
+
+  useEffect(() => {
+    loadUser();
+    // eslint-disable-next-line
+  }, []);
+
+  const onLogout = () => {
+    logout();
+    clearCategories();
+  };
+
+  const authLinks = (
+    <Fragment>
+      <li className='nav-item dropdown'>
+        <a
+          className='nav-link dropdown-toggle'
+          id='navbarDropdown'
+          role='button'
+          data-toggle='dropdown'
+          aria-haspopup='true'
+          aria-expanded='false'
+          href='/'
+        >
+          {user && user.name}
+        </a>
+        <div className='dropdown-menu' aria-labelledby='navbarDropdown'>
+          <a onClick={onLogout} className='nav-link' href='#!'>
+            <i className='fas fa-sign-out-alt' />{' '}
+            <span className='hide-sm'>注销</span>
+          </a>
+        </div>
+      </li>
+    </Fragment>
+  );
+
+  const guestLinks = (
+    <Fragment>
+      <li className='nav-item'>
+        <Link className='nav-link' to='/register'>
+          注册
+        </Link>
+      </li>
+      <li className='nav-item'>
+        <Link className='nav-link' to='/login'>
+          登陆
+        </Link>
+      </li>
+    </Fragment>
+  );
+
   return (
     <Fragment>
       <nav className='navbar navbar-expand-lg navbar-light bg-light'>
         <a className='navbar-brand' href='./'>
-          Web Nav
+          网站导航
         </a>
         <button
           className='navbar-toggler'
@@ -41,16 +98,7 @@ const Navbar = () => {
           </ul>
           <Search />
           <ul className='navbar-nav'>
-            <li className='nav-item'>
-              <Link className='nav-link' to='/login'>
-                登陆
-              </Link>
-            </li>
-            <li className='nav-item'>
-              <Link className='nav-link' to='/register'>
-                注册
-              </Link>
-            </li>
+            {isAuthenticated ? authLinks : guestLinks}
           </ul>
         </div>
       </nav>

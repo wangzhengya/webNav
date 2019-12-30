@@ -1,15 +1,8 @@
-import React, { useContext, useEffect, Fragment } from 'react';
-import AuthContext from '../../context/auth/AuthContext';
+import React, { Fragment } from 'react';
 import CategoryForm from '../categories/CategoryForm';
 import Categories from '../categories/Categories';
 
 const Category = () => {
-  const authContext = useContext(AuthContext);
-  useEffect(() => {
-    console.log('category load user');
-    authContext.loadUser();
-    //eslint-disable-next-line
-  }, []);
   return (
     <Fragment>
       <div className='container-fluid'>

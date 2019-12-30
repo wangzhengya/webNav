@@ -46,36 +46,40 @@ const Login = props => {
   };
   return (
     <div className='form-container'>
-      <h1>
-        账号<span className='text-primary'>登陆</span>
-      </h1>
-      <form onSubmit={onSubmit}>
-        <div className='form-group'>
-          <label htmlFor='email'>Email</label>
-          <input
-            type='email'
-            name='email'
-            className='form-control'
-            value={email}
-            onChange={onChange}
-          />
+      <div className='row justify-content-md-center'>
+        <div className='col col-lg-4'>
+          <h1 className='text-center'>
+            账号<span className='text-primary'>登陆</span>
+          </h1>
+          <form onSubmit={onSubmit}>
+            <div className='form-group'>
+              <label htmlFor='email'>Email</label>
+              <input
+                type='email'
+                name='email'
+                className='form-control'
+                value={email}
+                onChange={onChange}
+              />
+            </div>
+            <div className='form-group'>
+              <label htmlFor='password'>密码</label>
+              <input
+                type='password'
+                name='password'
+                className='form-control'
+                value={password}
+                onChange={onChange}
+              />
+            </div>
+            <input
+              type='submit'
+              value='登陆'
+              className='btn btn-primary btn-block'
+            />
+          </form>
         </div>
-        <div className='form-group'>
-          <label htmlFor='password'>Password</label>
-          <input
-            type='password'
-            name='password'
-            className='form-control'
-            value={password}
-            onChange={onChange}
-          />
-        </div>
-        <input
-          type='submit'
-          value='Login'
-          className='btn btn-primary btn-block'
-        />
-      </form>
+      </div>
     </div>
   );
 };
