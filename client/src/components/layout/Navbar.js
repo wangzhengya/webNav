@@ -42,7 +42,14 @@ const Navbar = () => {
           <Search />
           <ul className='navbar-nav'>
             <li className='nav-item'>
-              <a className='nav-link'>登录</a>
+              <Link className='nav-link' to='/login'>
+                登陆
+              </Link>
+            </li>
+            <li className='nav-item'>
+              <Link className='nav-link' to='/register'>
+                注册
+              </Link>
             </li>
           </ul>
         </div>
