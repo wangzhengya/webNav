@@ -1,10 +1,18 @@
-import React from 'react';
+import React, { Fragment } from 'react';
+
+import HomeLinks from '../home/HomeLinks';
 
 const Home = () => {
   return (
-    <div className='grid-2'>
-      <div>Home</div>
-    </div>
+    <Fragment>
+      <div className='container-fluid'>
+        <div className='row'>
+          <div className='col-12'>
+            <HomeLinks />
+          </div>
+        </div>
+      </div>
+    </Fragment>
   );
 };
 

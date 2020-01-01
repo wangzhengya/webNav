@@ -71,6 +71,11 @@ const CategoryForm = () => {
         className='form-control btn btn-success btn-block'
         value={current ? '编辑类别' : '新增类别'}
       />
+      {current && (
+        <button className='btn btn-light btn-block' onClick={clearAll}>
+          清空
+        </button>
+      )}
     </form>
   );
 };

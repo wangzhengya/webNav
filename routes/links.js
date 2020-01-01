@@ -5,6 +5,7 @@ const auth = require('../middleware/auth');
 
 const User = require('../models/User');
 const Link = require('../models/Link');
+const Category = require('../models/Category');
 
 // @route       GET api/links
 // @desc        获取所有该用户的link
@@ -13,6 +14,35 @@ router.get('/', auth, async (req, res) => {
   try {
     const links = await Link.find({ user: req.user.id });
     res.json(links);
+  } catch (error) {
+    console.error(error.message);
+    res.status(500).json({ msg: '获取用户所有连接时，服务器错误' });
+  }
+});
+
+// @route       GET api/links
+// @desc        获取所有该用户的link
+// @access      私有
+router.get('/all', auth, async (req, res) => {
+  try {
+    let linkGroups = [];
+    const links = await Link.find({ user: req.user.id });
+    const categories = await Category.find({ user: req.user.id });
+    if (categories) {
+      categories.forEach((category, i) => {
+        let linkgroup = {};
+        linkgroup.category = category;
+        linkgroup.links = links.filter(link => link.category == category.name);
+        // links.forEach((link, j) => {
+        //   if (link.category !== '' && link.category === category.name) {
+        //     linkgroup.links.push(link);
+        //     console.log(link);
+        //   }
+        // });
+        linkGroups.push(linkgroup);
+      });
+    }
+    res.json(linkGroups);
   } catch (error) {
     console.error(error.message);
     res.status(500).json({ msg: '获取用户所有连接时，服务器错误' });

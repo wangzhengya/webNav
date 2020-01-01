@@ -66,7 +66,6 @@ const CategoryState = props => {
         payload: err.response.msg
       });
     }
-    dispatch({ type: DELETE_CATEGORY, payload: id });
   };
   //set current category
   const setCurrent = category => {

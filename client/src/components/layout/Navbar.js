@@ -3,13 +3,16 @@ import Search from '../../components/layout/Search';
 import { Link } from 'react-router-dom';
 import AuthContext from '../../context/auth/AuthContext';
 import CatetoryContext from '../../context/category/CategoryContext';
+import LinkContext from '../../context/link/LinkContext';
 
 const Navbar = () => {
   const authContext = useContext(AuthContext);
   const catetoryContext = useContext(CatetoryContext);
+  const linkContext = useContext(LinkContext);
 
   const { isAuthenticated, logout, user, loadUser } = authContext;
   const { clearCategories } = catetoryContext;
+  const { clearLinks } = linkContext;
 
   useEffect(() => {
     loadUser();
@@ -19,6 +22,7 @@ const Navbar = () => {
   const onLogout = () => {
     logout();
     clearCategories();
+    clearLinks();
   };
 
   const authLinks = (
