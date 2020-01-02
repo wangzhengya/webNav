@@ -10,7 +10,6 @@ const Links = () => {
     getLinks();
     //eslint-disable-next-line
   }, []);
-  console.log(links);
   return (
     <Fragment>
       {links !== null && !loading ? (

@@ -89,7 +89,6 @@ const CategoryState = props => {
         category,
         config
       );
-      console.log(res.data);
       dispatch({
         type: UPDATE_CATEGORY,
         payload: res.data

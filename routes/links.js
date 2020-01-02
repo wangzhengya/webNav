@@ -20,8 +20,8 @@ router.get('/', auth, async (req, res) => {
   }
 });
 
-// @route       GET api/links
-// @desc        获取所有该用户的link
+// @route       GET api/links/all
+// @desc        获取所有该用户的link,按照种类分类
 // @access      私有
 router.get('/all', auth, async (req, res) => {
   try {

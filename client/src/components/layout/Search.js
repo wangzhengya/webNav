@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import axios from 'axios';
 
 const Search = () => {
   const [search, setSearch] = useState({ text: '' });
@@ -13,6 +14,14 @@ const Search = () => {
     const w = window.open('about:blank');
     // 要打开的新页面的url
     w.location.href = `https://baidu.com/s?wd=${text}`;
+    const config = {
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    };
+    try {
+      const res = axios.post('/api/searchs', { text }, config);
+    } catch (err) {}
     setSearch({ ...search, text: '' });
   };
 
