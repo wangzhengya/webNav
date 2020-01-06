@@ -28,7 +28,8 @@ const LinkSchema = mongoose.Schema({
     default: '简单'
   },
   style: {
-    type: String
+    type: String,
+    default: 'light'
   },
   category: {
     type: String,

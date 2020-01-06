@@ -29,6 +29,7 @@ const HomeLinkItem = props => {
         target='_blank'
         onClick={clickLink}
         className={`btn btn-block btn-${style}`}
+        style={{ marginTop: '2px' }}
       >
         {icon_url && <img src={icon_url} alt='' width='18px' />}
         <span> </span>

@@ -10,9 +10,11 @@ const HomeLinksGroup = props => {
           <h1>{category.name}</h1>
           <hr />
           <div className='row'>
-            {links.map(link => (
-              <HomeLinkItem key={link._id} link={link} />
-            ))}
+            {links
+              .sort((a, b) => b.views - a.views)
+              .map(link => (
+                <HomeLinkItem key={link._id} link={link} />
+              ))}
           </div>
         </Fragment>
       )}
