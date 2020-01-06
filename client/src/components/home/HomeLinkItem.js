@@ -28,7 +28,7 @@ const HomeLinkItem = props => {
         href={url}
         target='_blank'
         onClick={clickLink}
-        className={`btn  btn-${style}`}
+        className={`btn btn-block btn-${style}`}
       >
         {icon_url && <img src={icon_url} alt='' width='18px' />}
         <span> </span>
