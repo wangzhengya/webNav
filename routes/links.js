@@ -145,7 +145,7 @@ router.put('/:id', auth, async (req, res) => {
   if (icon_url) linkFields.icon_url = icon_url;
   if (views) linkFields.views = views;
   if (type) linkFields.type = type;
-  if (style) linkFields.style = title;
+  if (style) linkFields.style = style;
   if (category) linkFields.category = category;
 
   try {

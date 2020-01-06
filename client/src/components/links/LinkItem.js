@@ -27,21 +27,30 @@ const LinkItem = props => {
 
   return (
     <div className='col mb-4'>
-      <div className='card'>
+      <div className={`card border-${style}`}>
+        <div className='card-header'>
+          {icon_url && <img src={icon_url} alt='' width='18px' />}
+          {title}
+        </div>
         <div className='card-body'>
-          <h5 className='card-title'>
-            <a href={url} target='_blank'>
-              {title}
-            </a>
-          </h5>
-          <p className='lead'>{desc}</p>
-          <p>{date}</p>
-          <button className='btn btn-danger' onClick={onDelete}>
-            删除
-          </button>
-          <button className='btn btn-secondary' onClick={onEdit}>
-            编辑
-          </button>
+          <div className='row'>
+            <div className='col align-self-start'>
+              <button
+                className='btn btn-outline-danger btn-sm'
+                onClick={onDelete}
+              >
+                删除
+              </button>
+            </div>
+            <div className='col align-self-end'>
+              <button
+                className='btn btn-outline-secondary btn-sm align-self-end'
+                onClick={onEdit}
+              >
+                编辑
+              </button>
+            </div>
+          </div>
         </div>
       </div>
     </div>

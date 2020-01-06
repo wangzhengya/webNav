@@ -1,16 +1,49 @@
 import React, { useState, useContext, useEffect } from 'react';
 import LinkContext from '../../context/link/LinkContext';
+import CategoryContext from '../../context/category/CategoryContext';
+import Select from 'react-select';
 
 const LinkForm = () => {
   const linkContext = useContext(LinkContext);
-  const { addLink, current, clearCurrent, updateLink } = linkContext;
+  const {
+    addLink,
+    current,
+    clearCurrent,
+    updateLink,
+    checkUrl,
+    url2link
+  } = linkContext;
+
+  const color_options = [
+    { value: 'primary', label: '深蓝色' },
+    { value: 'secondary', label: '灰色' },
+    { value: 'success', label: '绿色' },
+    { value: 'danger', label: '红色' },
+    { value: 'warning', label: '黄色' },
+    { value: 'info', label: '浅蓝色' },
+    { value: 'light', label: '浅色' },
+    { value: 'dark', label: '黑色' }
+  ];
+
+  const categoryContext = useContext(CategoryContext);
+  const { categories, getCategories } = categoryContext;
 
   const [link, setLink] = useState({
     title: '',
     url: ''
   });
+  const options =
+    categories === null
+      ? []
+      : categories.map(category => {
+          return { value: category.name, label: category.name };
+        });
 
   useEffect(() => {
+    if (categories === null) {
+      console.log('执行了一次获取类型');
+      getCategories();
+    }
     if (current !== null) {
       setLink(current);
     } else {
@@ -19,11 +52,19 @@ const LinkForm = () => {
         url: ''
       });
     }
+    //eslint-disable-next-line
   }, [linkContext, current]);
+
   const { title, url, desc, icon_url, type, style, category, date } = link;
 
   const onChange = e => {
     setLink({ ...link, [e.target.name]: e.target.value });
+  };
+  const onCheckUrl = e => {
+    e.preventDefault();
+    if (url !== '') {
+      checkUrl(url);
+    }
   };
 
   const onSubmit = e => {
@@ -70,6 +111,7 @@ const LinkForm = () => {
         onChange={onChange}
         placeholder='URL'
       />
+
       <h5>图标:</h5>
       <input
         type='text'
@@ -88,27 +130,44 @@ const LinkForm = () => {
         onChange={onChange}
         placeholder='类型'
       />
+
       <h5>分类:</h5>
-      <input
-        type='text'
+      <select
+        className='form-control'
         name='category'
+        onChange={onChange}
         value={category || ''}
-        className='form-control'
-        onChange={onChange}
-        placeholder='分类'
-      />
+      >
+        {options.length > 0 &&
+          options.map((item, i) => {
+            return (
+              <option value={`${item.value}`} key={i}>
+                {item.label}
+              </option>
+            );
+          })}
+      </select>
+
       <h5>样式:</h5>
-      <input
-        type='text'
-        name='style'
-        value={style || ''}
+      <select
         className='form-control'
+        name='style'
         onChange={onChange}
-        placeholder='样式'
-      />
+        value={style || 'primary'}
+      >
+        {color_options.length > 0 &&
+          color_options.map((item, i) => {
+            return (
+              <option value={`${item.value}`} key={i}>
+                {item.label}
+              </option>
+            );
+          })}
+      </select>
       <input
         type='submit'
         className='form-control btn btn-success btn-block'
+        onClick={onSubmit}
         value={current ? '编辑连接' : '新增连接'}
       />
       {current && (

@@ -28,12 +28,14 @@ const HomeLinkItem = props => {
         href={url}
         target='_blank'
         onClick={clickLink}
-        className='btn btn-outline-dark'
+        className={`btn  btn-${style}`}
       >
+        {icon_url && <img src={icon_url} alt='' width='18px' />}
+        <span> </span>
         {title}
+        <span> </span>
         <span className='badge badge-pill badge-light'> {views}</span>
       </button>
-      <p>{style}</p>
     </div>
   );
 };

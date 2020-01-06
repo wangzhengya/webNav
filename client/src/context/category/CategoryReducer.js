@@ -6,7 +6,8 @@ import {
   CLEAR_CURRENT,
   UPDATE_CATEGORY,
   CATEGORY_ERROR,
-  CLEAR_CATEGORIES
+  CLEAR_CATEGORIES,
+  CHECK_URL
 } from '../types';
 
 export default (state, action) => {
@@ -50,6 +51,13 @@ export default (state, action) => {
         categories: state.categories.map(category =>
           category._id === action.payload._id ? action.payload : category
         )
+      };
+    case CHECK_URL:
+      console.log(action.payload);
+      return {
+        ...state,
+        loading: false,
+        url2link: action.payload
       };
     case CLEAR_CURRENT:
       return {

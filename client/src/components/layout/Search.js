@@ -20,7 +20,7 @@ const Search = () => {
       }
     };
     try {
-      const res = axios.post('/api/searchs', { text }, config);
+      axios.post('/api/searchs', { text }, config);
     } catch (err) {}
     setSearch({ ...search, text: '' });
   };

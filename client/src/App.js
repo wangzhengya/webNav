@@ -31,7 +31,7 @@ function App() {
                     <Route exact path='/login' component={Login} />
                     <Route exact path='/about' component={About} />
                     <PrivateRoute exact path='/category' component={Category} />
-                    <PrivateRoute exact path='/link' component={Link} />
+                    <Route exact path='/link' component={Link} />
                   </Switch>
                 </div>
               </Fragment>

@@ -12,7 +12,8 @@ import {
   UPDATE_LINK,
   LINK_ERROR,
   CLEAR_LINKS,
-  LINK_CLICKED
+  LINK_CLICKED,
+  CHECK_URL
 } from '../types';
 
 const LinkState = props => {
@@ -20,7 +21,8 @@ const LinkState = props => {
     linkgroups: null,
     links: null,
     current: null,
-    error: null
+    error: null,
+    url2link: null
   };
   const [state, dispatch] = useReducer(linkReducer, initialState);
   //get links sort by category
@@ -72,6 +74,7 @@ const LinkState = props => {
   };
   //Add Link
   const addLink = async link => {
+    console.log(link);
     const config = {
       headers: {
         'Content-Type': 'application/json'
@@ -109,6 +112,7 @@ const LinkState = props => {
   };
   //update link
   const updateLink = async link => {
+    console.log(link);
     const config = {
       headers: {
         'Content-Type': 'application/json'
@@ -129,6 +133,32 @@ const LinkState = props => {
       });
     }
   };
+  //url地址解析
+  const checkUrl = async url => {
+    console.log(url);
+    const config = {
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    };
+    try {
+      const res = await axios.post(`/api/url`, { urlString: url }, config);
+      console.log(res.data);
+      state.url2link = res.data;
+      dispatch({
+        type: CHECK_URL,
+        payload: res.data
+      });
+      console.log('test');
+    } catch (err) {
+      console.log(err);
+      dispatch({
+        type: LINK_ERROR,
+        payload: err.response.msg
+      });
+    }
+  };
+
   return (
     <LinkContext.Provider
       value={{
@@ -136,6 +166,7 @@ const LinkState = props => {
         links: state.links,
         current: state.current,
         error: state.error,
+        url2link: state.url2link,
         addLink,
         deleteLink,
         setCurrent,
@@ -144,7 +175,8 @@ const LinkState = props => {
         getLinksSortByCategory,
         getLinks,
         clearLinks,
-        linkClicked
+        linkClicked,
+        checkUrl
       }}
     >
       {props.children}
