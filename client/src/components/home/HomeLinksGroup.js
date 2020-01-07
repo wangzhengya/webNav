@@ -7,7 +7,7 @@ const HomeLinksGroup = props => {
     <Fragment>
       {links !== [] && (
         <Fragment>
-          <h1>{category.name}</h1>
+          <h2 id={category.name}>{category.name}</h2>
           <hr />
           <div className='row'>
             {links

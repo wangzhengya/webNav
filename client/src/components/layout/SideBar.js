@@ -1,0 +1,37 @@
+import React, { useContext, Fragment, useEffect } from 'react';
+import AuthContext from '../../context/auth/AuthContext';
+import CatetoryContext from '../../context/category/CategoryContext';
+
+const SideBar = props => {
+  const linkgroups = props.linkgroups;
+  return (
+    <Fragment>
+      <nav className='col-md-2 d-none d-md-block bg-light sidebar'>
+        <div className='sidebar-sticky' id='list_sidebar'>
+          {linkgroups !== null ? (
+            <div data-spy='scroll' data-target='#list-navbar' data-offset='0'>
+              {linkgroups
+                .sort((a, b) => b.category.weight - a.category.weight)
+                .map(linkgroup => (
+                  <a
+                    key={linkgroup.category.name}
+                    className='list-group-item list-group-item-action'
+                    href={`#${linkgroup.category.name}`}
+                  >
+                    {linkgroup.category.name}
+                  </a>
+                ))}
+            </div>
+          ) : (
+            <div className='spinner-border' role='status'>
+              <span className='sr-only'>加载中。。。</span>
+            </div>
+          )}
+        </div>
+      </nav>
+      )
+    </Fragment>
+  );
+};
+
+export default SideBar;

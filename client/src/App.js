@@ -23,7 +23,7 @@ function App() {
             <Router>
               <Fragment>
                 <Navbar />
-                <div className='container' style={{ paddingTop: '60px' }}>
+                <div className='container-fluid' style={{ paddingTop: '60px' }}>
                   <Alerts />
                   <Switch>
                     <Route exact path='/' component={Home} />

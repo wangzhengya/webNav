@@ -1,5 +1,5 @@
 import React, { Fragment } from 'react';
-
+import SideBar from '../../components/layout/SideBar';
 import HomeLinks from '../home/HomeLinks';
 
 const Home = () => {
@@ -7,9 +7,7 @@ const Home = () => {
     <Fragment>
       <div className='container-fluid'>
         <div className='row'>
-          <div className='col-12'>
-            <HomeLinks />
-          </div>
+          <HomeLinks />
         </div>
       </div>
     </Fragment>
