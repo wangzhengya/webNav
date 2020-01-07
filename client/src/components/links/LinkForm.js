@@ -112,9 +112,12 @@ const LinkForm = () => {
         onChange={onChange}
         placeholder='URL'
       />
-      <button className='btn btn-block btn-info' onClick={onCheckUrl}>
-        自动填入
-      </button>
+      {!current && (
+        <button className='btn btn-block btn-info' onClick={onCheckUrl}>
+          自动填入
+        </button>
+      )}
+
       <h5>名称:</h5>
       <input
         type='text'
