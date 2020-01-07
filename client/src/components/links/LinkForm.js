@@ -11,7 +11,8 @@ const LinkForm = () => {
     clearCurrent,
     updateLink,
     checkUrl,
-    url2link
+    url2link,
+    clearUrl
   } = linkContext;
 
   const color_options = [
@@ -30,7 +31,11 @@ const LinkForm = () => {
 
   const [link, setLink] = useState({
     title: '',
-    url: ''
+    url: '',
+    desc: '',
+    icon_url: '',
+    style: '',
+    category: ''
   });
   const options =
     categories === null
@@ -44,14 +49,27 @@ const LinkForm = () => {
       console.log('执行了一次获取类型');
       getCategories();
     }
+
     if (current !== null) {
       setLink(current);
+    } else if (url2link !== null) {
+      setLink({
+        url: url2link.url,
+        title: url2link.title,
+        icon_url: url2link.icon_url,
+        desc: url2link.desc
+      });
     } else {
       setLink({
         title: '',
-        url: ''
+        url: '',
+        desc: '',
+        icon_url: '',
+        style: '',
+        category: ''
       });
     }
+
     //eslint-disable-next-line
   }, [linkContext, current]);
 
@@ -60,10 +78,10 @@ const LinkForm = () => {
   const onChange = e => {
     setLink({ ...link, [e.target.name]: e.target.value });
   };
-  const onCheckUrl = e => {
+  const onCheckUrl = async e => {
     e.preventDefault();
     if (url !== '') {
-      checkUrl(url);
+      await checkUrl(url);
     }
   };
 
@@ -79,11 +97,24 @@ const LinkForm = () => {
 
   const clearAll = () => {
     clearCurrent();
+    clearUrl();
   };
 
   return (
     <form onSubmit={onSubmit}>
       <h2 className='text-primary'>{current ? '编辑连接' : '新增连接'}</h2>
+      <h5>URL:</h5>
+      <input
+        type='text'
+        name='url'
+        value={url || ''}
+        className='form-control'
+        onChange={onChange}
+        placeholder='URL'
+      />
+      <button className='btn btn-block btn-info' onClick={onCheckUrl}>
+        自动填入
+      </button>
       <h5>名称:</h5>
       <input
         type='text'
@@ -101,15 +132,6 @@ const LinkForm = () => {
         className='form-control'
         onChange={onChange}
         placeholder='描述'
-      />
-      <h5>URL:</h5>
-      <input
-        type='text'
-        name='url'
-        value={url || ''}
-        className='form-control'
-        onChange={onChange}
-        placeholder='URL'
       />
 
       <h5>图标:</h5>
@@ -170,7 +192,7 @@ const LinkForm = () => {
         onClick={onSubmit}
         value={current ? '编辑连接' : '新增连接'}
       />
-      {current && (
+      {(current || url2link) && (
         <button className='btn btn-light btn-block' onClick={clearAll}>
           清空
         </button>

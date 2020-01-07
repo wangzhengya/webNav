@@ -52,13 +52,7 @@ export default (state, action) => {
           category._id === action.payload._id ? action.payload : category
         )
       };
-    case CHECK_URL:
-      console.log(action.payload);
-      return {
-        ...state,
-        loading: false,
-        url2link: action.payload
-      };
+    
     case CLEAR_CURRENT:
       return {
         ...state,

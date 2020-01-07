@@ -13,14 +13,11 @@ const url = require('url');
 // @access      Public
 
 router.post('/', async (req, res) => {
-  console.log(req.body);
   let { urlString } = req.body;
-  console.log(req.body);
   if (!urlString.startsWith('http')) {
     urlString = 'https://' + urlString;
   }
   urlObj = url.parse(urlString);
-  console.log(urlObj);
   try {
     response = await axios.get(urlString);
     const $ = cheerio.load(response.data);

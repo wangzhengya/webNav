@@ -8,7 +8,9 @@ import {
   UPDATE_LINK,
   LINK_ERROR,
   CLEAR_LINKS,
-  LINK_CLICKED
+  LINK_CLICKED,
+  CHECK_URL,
+  CLEAR_URL
 } from '../types';
 
 export default (state, action) => {
@@ -73,6 +75,17 @@ export default (state, action) => {
         links: state.links.map(link =>
           link._id === action.payload._id ? action.payload : link
         )
+      };
+    case CHECK_URL:
+      return {
+        ...state,
+        loading: false,
+        url2link: action.payload
+      };
+    case CLEAR_URL:
+      return {
+        ...state,
+        url2link: null
       };
     case CLEAR_CURRENT:
       return {

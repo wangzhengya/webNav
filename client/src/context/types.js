@@ -25,3 +25,4 @@ export const UPDATE_LINK = 'UPDATE_LINK';
 export const LINK_ERROR = 'LINK_ERROR';
 export const LINK_CLICKED = 'LINK_CLICKED';
 export const CHECK_URL = 'CHECK_URL';
+export const CLEAR_URL = 'CLEAR_URL';

@@ -13,7 +13,8 @@ import {
   LINK_ERROR,
   CLEAR_LINKS,
   LINK_CLICKED,
-  CHECK_URL
+  CHECK_URL,
+  CLEAR_URL
 } from '../types';
 
 const LinkState = props => {
@@ -74,7 +75,6 @@ const LinkState = props => {
   };
   //Add Link
   const addLink = async link => {
-    console.log(link);
     const config = {
       headers: {
         'Content-Type': 'application/json'
@@ -102,17 +102,19 @@ const LinkState = props => {
       });
     }
   };
+
   //set current link
   const setCurrent = link => {
     dispatch({ type: SET_CURRENT, payload: link });
   };
+
   //clear current link
   const clearCurrent = () => {
     dispatch({ type: CLEAR_CURRENT });
   };
+
   //update link
   const updateLink = async link => {
-    console.log(link);
     const config = {
       headers: {
         'Content-Type': 'application/json'
@@ -133,9 +135,9 @@ const LinkState = props => {
       });
     }
   };
+
   //url地址解析
   const checkUrl = async url => {
-    console.log(url);
     const config = {
       headers: {
         'Content-Type': 'application/json'
@@ -143,13 +145,11 @@ const LinkState = props => {
     };
     try {
       const res = await axios.post(`/api/url`, { urlString: url }, config);
-      console.log(res.data);
-      state.url2link = res.data;
+
       dispatch({
         type: CHECK_URL,
         payload: res.data
       });
-      console.log('test');
     } catch (err) {
       console.log(err);
       dispatch({
@@ -157,6 +157,11 @@ const LinkState = props => {
         payload: err.response.msg
       });
     }
+  };
+
+  //url地址解析清空
+  const clearUrl = async url => {
+    dispatch({ type: CLEAR_URL });
   };
 
   return (
@@ -176,7 +181,8 @@ const LinkState = props => {
         getLinks,
         clearLinks,
         linkClicked,
-        checkUrl
+        checkUrl,
+        clearUrl
       }}
     >
       {props.children}
