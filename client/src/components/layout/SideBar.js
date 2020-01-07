@@ -7,9 +7,9 @@ const SideBar = props => {
   return (
     <Fragment>
       <nav className='col-md-2 d-none d-md-block bg-light sidebar'>
-        <div className='sidebar-sticky' id='list_sidebar'>
+        <div className='sidebar-sticky' id='list-sidebar'>
           {linkgroups !== null ? (
-            <div data-spy='scroll' data-target='#list-navbar' data-offset='0'>
+            <Fragment>
               {linkgroups
                 .sort((a, b) => b.category.weight - a.category.weight)
                 .map(linkgroup => (
@@ -21,7 +21,7 @@ const SideBar = props => {
                     {linkgroup.category.name}
                   </a>
                 ))}
-            </div>
+            </Fragment>
           ) : (
             <div className='spinner-border' role='status'>
               <span className='sr-only'>加载中。。。</span>
@@ -29,7 +29,6 @@ const SideBar = props => {
           )}
         </div>
       </nav>
-      )
     </Fragment>
   );
 };

@@ -23,7 +23,7 @@ const HomeLinkItem = props => {
     linkClicked(_id, category);
   };
   return (
-    <div className='col-2'>
+    <div className='col-lg-2 col-md-3 col-sm-6'>
       <button
         href={url}
         target='_blank'

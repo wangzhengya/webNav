@@ -22,28 +22,27 @@ const HomeLinks = () => {
       {isAuthenticated ? (
         <Fragment>
           <SideBar linkgroups={linkgroups} />
-          <div className='col-md-9 ml-sm-auto col-lg-10 px-4'>
-            {linkgroups !== null && !loading ? (
-              <div
-                data-spy='scroll'
-                data-target='#list-sidebar'
-                data-offset='0'
-              >
-                {linkgroups
-                  .sort((a, b) => b.category.weight - a.category.weight)
-                  .map(linkgroup => (
-                    <HomeLinksGroup
-                      key={linkgroup.category._id}
-                      linkgroup={linkgroup}
-                    />
-                  ))}
-              </div>
-            ) : (
-              <div className='spinner-border' role='status'>
-                <span className='sr-only'>加载中。。。</span>
-              </div>
-            )}
-          </div>
+          {linkgroups !== null && !loading ? (
+            <div
+              data-spy='scroll'
+              data-target='#list-sidebar'
+              data-offset='0'
+              className='col-md-9 ml-sm-auto col-lg-10 px-4'
+            >
+              {linkgroups
+                .sort((a, b) => b.category.weight - a.category.weight)
+                .map(linkgroup => (
+                  <HomeLinksGroup
+                    key={linkgroup.category._id}
+                    linkgroup={linkgroup}
+                  />
+                ))}
+            </div>
+          ) : (
+            <div className='spinner-border' role='status'>
+              <span className='sr-only'>加载中。。。</span>
+            </div>
+          )}
         </Fragment>
       ) : (
         <div className='col-12'>
