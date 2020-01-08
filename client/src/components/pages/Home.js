@@ -1,5 +1,4 @@
 import React, { Fragment } from 'react';
-import SideBar from '../../components/layout/SideBar';
 import HomeLinks from '../home/HomeLinks';
 
 const Home = () => {

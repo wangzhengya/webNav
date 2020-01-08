@@ -15,7 +15,10 @@ const Navbar = () => {
   const { clearLinks } = linkContext;
 
   useEffect(() => {
-    loadUser();
+    if (isAuthenticated) {
+      loadUser();
+    }
+
     // eslint-disable-next-line
   }, []);
 

@@ -1,5 +1,4 @@
-import React, { Fragment, useState, useContext, useEffect } from 'react';
-import HomeLinkItem from './HomeLinkItem';
+import React, { Fragment, useContext, useEffect } from 'react';
 import HomeLinksGroup from './HomeLinksGroup';
 import LinkContext from '../../context/link/LinkContext';
 import AuthContext from '../../context/auth/AuthContext';
@@ -10,10 +9,12 @@ const HomeLinks = () => {
   const linkContext = useContext(LinkContext);
   const authContext = useContext(AuthContext);
   const { linkgroups, getLinksSortByCategory, loading } = linkContext;
-  const { isAuthenticated, logout, user, loadUser } = authContext;
+  const { isAuthenticated } = authContext;
 
   useEffect(() => {
-    getLinksSortByCategory();
+    if (isAuthenticated) {
+      getLinksSortByCategory();
+    }
 
     //eslint-disable-next-line
   }, []);

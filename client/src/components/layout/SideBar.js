@@ -1,6 +1,4 @@
-import React, { useContext, Fragment, useEffect } from 'react';
-import AuthContext from '../../context/auth/AuthContext';
-import CatetoryContext from '../../context/category/CategoryContext';
+import React, { Fragment } from 'react';
 
 const SideBar = props => {
   const linkgroups = props.linkgroups;

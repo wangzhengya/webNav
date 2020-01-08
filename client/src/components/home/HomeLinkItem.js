@@ -10,10 +10,8 @@ const HomeLinkItem = props => {
     url,
     desc,
     icon_url,
-    type,
     style,
     category,
-    date,
     views,
     _id
   } = props.link;
@@ -27,6 +25,7 @@ const HomeLinkItem = props => {
       <button
         href={url}
         target='_blank'
+        title={desc}
         onClick={clickLink}
         className={`btn btn-block btn-${style}`}
         style={{ marginTop: '2px' }}

@@ -1,7 +1,6 @@
 import React, { useState, useContext, useEffect } from 'react';
 import LinkContext from '../../context/link/LinkContext';
 import CategoryContext from '../../context/category/CategoryContext';
-import Select from 'react-select';
 
 const LinkForm = () => {
   const linkContext = useContext(LinkContext);
@@ -73,7 +72,7 @@ const LinkForm = () => {
     //eslint-disable-next-line
   }, [linkContext, current]);
 
-  const { title, url, desc, icon_url, type, style, category, date } = link;
+  const { title, url, desc, icon_url, type, style, category } = link;
 
   const onChange = e => {
     setLink({ ...link, [e.target.name]: e.target.value });

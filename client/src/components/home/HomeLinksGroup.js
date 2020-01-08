@@ -1,4 +1,4 @@
-import React, { Fragment, useState, useContext, useEffect } from 'react';
+import React, { Fragment } from 'react';
 import HomeLinkItem from './HomeLinkItem';
 
 const HomeLinksGroup = props => {

@@ -6,8 +6,7 @@ import {
   CLEAR_CURRENT,
   UPDATE_CATEGORY,
   CATEGORY_ERROR,
-  CLEAR_CATEGORIES,
-  CHECK_URL
+  CLEAR_CATEGORIES
 } from '../types';
 
 export default (state, action) => {
@@ -52,7 +51,7 @@ export default (state, action) => {
           category._id === action.payload._id ? action.payload : category
         )
       };
-    
+
     case CLEAR_CURRENT:
       return {
         ...state,

@@ -2,17 +2,7 @@ import React, { useContext } from 'react';
 import LinkContext from '../../context/link/LinkContext';
 
 const LinkItem = props => {
-  const {
-    title,
-    url,
-    desc,
-    icon_url,
-    type,
-    style,
-    category,
-    date,
-    _id
-  } = props.link;
+  const { title, url, icon_url, style, _id } = props.link;
 
   const linkContext = useContext(LinkContext);
 
@@ -30,7 +20,7 @@ const LinkItem = props => {
       <div className={`card border-${style}`}>
         <div className='card-header'>
           {icon_url && <img src={icon_url} alt='' width='18px' />}
-          {title}
+          <a href={url}>{title}</a>
         </div>
         <div className='card-body'>
           <div className='row'>
