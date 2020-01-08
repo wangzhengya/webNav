@@ -15,9 +15,7 @@ const Navbar = () => {
   const { clearLinks } = linkContext;
 
   useEffect(() => {
-    if (isAuthenticated) {
-      loadUser();
-    }
+    loadUser();
 
     // eslint-disable-next-line
   }, []);
@@ -70,7 +68,7 @@ const Navbar = () => {
   return (
     <Fragment>
       <nav className='navbar navbar-expand-lg navbar-light bg-light fixed-top'>
-        <a className='navbar-brand' href='./'>
+        <a className='navbar-brand' href='/'>
           网站导航
         </a>
         <button

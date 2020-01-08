@@ -12,9 +12,7 @@ const HomeLinks = () => {
   const { isAuthenticated } = authContext;
 
   useEffect(() => {
-    if (isAuthenticated) {
-      getLinksSortByCategory();
-    }
+    getLinksSortByCategory();
 
     //eslint-disable-next-line
   }, []);
