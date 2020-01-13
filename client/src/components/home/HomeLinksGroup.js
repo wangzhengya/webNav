@@ -1,8 +1,7 @@
 import React, { Fragment } from 'react';
 import HomeLinkItem from './HomeLinkItem';
 
-const HomeLinksGroup = props => {
-  const { links, category } = props.linkgroup;
+const HomeLinksGroup = ({ links, category }) => {
   return (
     <Fragment>
       {links !== [] && (

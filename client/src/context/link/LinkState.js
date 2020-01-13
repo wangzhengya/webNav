@@ -55,12 +55,12 @@ const LinkState = props => {
     }
   };
   //link clicked
-  const linkClicked = async (id, category) => {
+  const linkClicked = async link => {
     try {
-      await axios.get(`/api/links/${id}`);
+      await axios.get(`/api/links/${link._id}`);
       dispatch({
         type: LINK_CLICKED,
-        payload: { id: id, category: category }
+        payload: link
       });
     } catch (err) {
       dispatch({
@@ -84,6 +84,7 @@ const LinkState = props => {
       const res = await axios.post('/api/links', link, config);
       dispatch({ type: ADD_LINK, payload: res.data });
     } catch (err) {
+      console.log(err);
       dispatch({ type: LINK_ERROR, payload: err.response.msg });
     }
   };

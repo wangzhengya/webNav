@@ -1,9 +1,11 @@
 import React, { useState, useContext, useEffect } from 'react';
 import LinkContext from '../../context/link/LinkContext';
 import CategoryContext from '../../context/category/CategoryContext';
+import AuthContext from '../../context/auth/AuthContext';
 
 const LinkForm = () => {
   const linkContext = useContext(LinkContext);
+  const authContext = useContext(AuthContext);
   const {
     addLink,
     current,
@@ -13,6 +15,7 @@ const LinkForm = () => {
     url2link,
     clearUrl
   } = linkContext;
+  const { isAuthenticated } = authContext;
 
   const color_options = [
     { value: 'primary', label: '深蓝色' },
@@ -44,7 +47,7 @@ const LinkForm = () => {
         });
 
   useEffect(() => {
-    if (categories === null) {
+    if (categories === null && isAuthenticated) {
       console.log('执行了一次获取类型');
       getCategories();
     }

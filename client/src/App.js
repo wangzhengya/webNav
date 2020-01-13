@@ -13,6 +13,7 @@ import Login from './components/auth/Login';
 import Register from './components/auth/Register';
 import PrivateRoute from './components/routing/PrivateRoute';
 import LinkState from './context/link/LinkState';
+import LinkAddModal from './components/links/LinkAddModal';
 
 function App() {
   return (
@@ -26,14 +27,15 @@ function App() {
                 <div className='container-fluid' style={{ paddingTop: '60px' }}>
                   <Alerts />
                   <Switch>
-                    <Route exact path='/' component={Home} />
+                    <PrivateRoute exact path='/' component={Home} />
                     <Route exact path='/register' component={Register} />
                     <Route exact path='/login' component={Login} />
                     <Route exact path='/about' component={About} />
                     <PrivateRoute exact path='/category' component={Category} />
-                    <Route exact path='/link' component={Link} />
+                    <PrivateRoute exact path='/link' component={Link} />
                   </Switch>
                 </div>
+                <LinkAddModal />
               </Fragment>
             </Router>
           </AlertState>

@@ -10,12 +10,14 @@ const Navbar = () => {
   const categoryContext = useContext(CatetoryContext);
   const linkContext = useContext(LinkContext);
 
-  const { isAuthenticated, logout, user, loadUser } = authContext;
+  const { logout, user, loadUser, token } = authContext;
   const { clearCategories } = categoryContext;
   const { clearLinks } = linkContext;
 
   useEffect(() => {
-    loadUser();
+    if (token) {
+      loadUser();
+    }
 
     // eslint-disable-next-line
   }, []);
@@ -42,7 +44,6 @@ const Navbar = () => {
         </a>
         <div className='dropdown-menu' aria-labelledby='navbarDropdown'>
           <a onClick={onLogout} className='nav-link' href='#!'>
-            <i className='fas fa-sign-out-alt' />{' '}
             <span className='hide-sm'>注销</span>
           </a>
         </div>
@@ -100,11 +101,23 @@ const Navbar = () => {
                 连接
               </Link>
             </li>
+
+            {token && (
+              <li>
+                <button
+                  type='button'
+                  className='btn btn-primary '
+                  data-toggle='modal'
+                  data-target='#exampleModal'
+                >
+                  +
+                </button>
+              </li>
+            )}
           </ul>
+
           <Search />
-          <ul className='navbar-nav'>
-            {isAuthenticated ? authLinks : guestLinks}
-          </ul>
+          <ul className='navbar-nav'>{token ? authLinks : guestLinks}</ul>
         </div>
       </nav>
     </Fragment>

@@ -11,14 +11,13 @@ const HomeLinkItem = props => {
     desc,
     icon_url,
     style,
-    category,
-    views,
-    _id
+
+    views
   } = props.link;
   const clickLink = () => {
     const w = window.open('about:blank');
     w.location.href = `${url}`;
-    linkClicked(_id, category);
+    linkClicked(props.link);
   };
   return (
     <div className='col-lg-2 col-md-3 col-sm-6'>

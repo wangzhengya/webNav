@@ -48,20 +48,13 @@ export default (state, action) => {
         links: state.links.filter(link => link._id !== action.payload)
       };
     case LINK_CLICKED:
+      action.payload.views += 1;
       return {
         ...state,
         loading: false,
-        linkgroups: state.linkgroups.map(linkgroup => {
-          if (linkgroup.category.name === action.payload.category) {
-            linkgroup.links.map(link => {
-              if (link._id === action.payload.id) {
-                link.views = link.views + 1;
-              }
-              return link;
-            });
-          }
-          return linkgroup;
-        })
+        links: state.links.map(link =>
+          link._id === action.payload._id ? action.payload : link
+        )
       };
     case SET_CURRENT:
       return {

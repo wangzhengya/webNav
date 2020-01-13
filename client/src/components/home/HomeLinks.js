@@ -1,6 +1,7 @@
 import React, { Fragment, useContext, useEffect } from 'react';
 import HomeLinksGroup from './HomeLinksGroup';
 import LinkContext from '../../context/link/LinkContext';
+import CategoryContext from '../../context/category/CategoryContext';
 import AuthContext from '../../context/auth/AuthContext';
 import { Link } from 'react-router-dom';
 import SideBar from '../../components/layout/SideBar';
@@ -8,11 +9,16 @@ import SideBar from '../../components/layout/SideBar';
 const HomeLinks = () => {
   const linkContext = useContext(LinkContext);
   const authContext = useContext(AuthContext);
-  const { linkgroups, getLinksSortByCategory, loading } = linkContext;
-  const { isAuthenticated } = authContext;
+  const categoryContext = useContext(CategoryContext);
+  const { loading, getLinks, links } = linkContext;
+  const { isAuthenticated, token } = authContext;
+  const { categories, getCategories } = categoryContext;
 
   useEffect(() => {
-    getLinksSortByCategory();
+    if (token) {
+      getCategories();
+      getLinks();
+    }
 
     //eslint-disable-next-line
   }, []);
@@ -20,20 +26,23 @@ const HomeLinks = () => {
     <Fragment>
       {isAuthenticated ? (
         <Fragment>
-          <SideBar linkgroups={linkgroups} />
-          {linkgroups !== null && !loading ? (
+          <SideBar categories={categories} />
+          {links !== null && !loading && categories !== null ? (
             <div
               data-spy='scroll'
               data-target='#list-sidebar'
               data-offset='0'
               className='col-md-9 ml-sm-auto col-lg-10 px-4'
             >
-              {linkgroups
-                .sort((a, b) => b.category.weight - a.category.weight)
-                .map(linkgroup => (
+              {categories
+                .sort((a, b) => b.weight - a.weight)
+                .map(category => (
                   <HomeLinksGroup
-                    key={linkgroup.category._id}
-                    linkgroup={linkgroup}
+                    key={category._id}
+                    category={category}
+                    links={links.filter(
+                      link => link.category === category.name
+                    )}
                   />
                 ))}
             </div>
