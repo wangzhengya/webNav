@@ -70,7 +70,7 @@ const Navbar = () => {
     <Fragment>
       <nav className='navbar navbar-expand-lg navbar-light bg-light fixed-top'>
         <a className='navbar-brand' href='/'>
-          网站导航
+          {user && user.name + '的'}网站导航
         </a>
         <button
           className='navbar-toggler'

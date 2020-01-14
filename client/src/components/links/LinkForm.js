@@ -18,6 +18,7 @@ const LinkForm = () => {
   const { isAuthenticated } = authContext;
 
   const color_options = [
+    { value: '', label: '---' },
     { value: 'primary', label: '深蓝色' },
     { value: 'secondary', label: '灰色' },
     { value: 'success', label: '绿色' },
@@ -180,7 +181,7 @@ const LinkForm = () => {
         className='form-control'
         name='style'
         onChange={onChange}
-        value={style || 'primary'}
+        value={style}
       >
         {color_options.length > 0 &&
           color_options.map((item, i) => {

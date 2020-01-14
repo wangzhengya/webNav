@@ -14,9 +14,6 @@ const LinkAddModal = () => {
       <div className='modal-dialog' role='document'>
         <div className='modal-content'>
           <div className='modal-header'>
-            <h5 className='modal-title' id='exampleModalLabel'>
-              添加新的链接
-            </h5>
             <button
               type='button'
               className='close'
@@ -36,9 +33,6 @@ const LinkAddModal = () => {
               data-dismiss='modal'
             >
               关闭
-            </button>
-            <button type='button' className='btn btn-primary'>
-              新增
             </button>
           </div>
         </div>
